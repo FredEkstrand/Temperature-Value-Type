@@ -1,0 +1,6 @@
+C:\SoftwareProjects\TemperatureValue\bin\Release\TemperatureValue.dll
+C:\SoftwareProjects\TemperatureValue\bin\Release\TemperatureValue.pdb
+C:\SoftwareProjects\TemperatureValue\bin\Release\System.Net.Http.dll
+C:\SoftwareProjects\TemperatureValue\bin\Release\System.Net.Http.xml
+C:\SoftwareProjects\TemperatureValue\obj\Release\TemperatureValue.dll
+C:\SoftwareProjects\TemperatureValue\obj\Release\TemperatureValue.pdb

@@ -1,0 +1,8 @@
+C:\SoftwareProjects\TemperatureValue\bin\Debug\TemperatureValue.dll
+C:\SoftwareProjects\TemperatureValue\bin\Debug\TemperatureValue.pdb
+C:\SoftwareProjects\TemperatureValue\obj\Debug\TemperatureValue.dll
+C:\SoftwareProjects\TemperatureValue\obj\Debug\TemperatureValue.pdb
+C:\SoftwareProjects\TemperatureValue\obj\Debug\TemperatureValue.csprojResolveAssemblyReference.cache
+C:\SoftwareProjects\TemperatureValue\bin\Debug\TemperatureValue.XML
+C:\SoftwareProjects\TemperatureValue\bin\Debug\System.Net.Http.dll
+C:\SoftwareProjects\TemperatureValue\bin\Debug\System.Net.Http.xml
