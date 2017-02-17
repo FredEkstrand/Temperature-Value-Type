@@ -63,6 +63,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyKey("AKH8-NN0E9-N3ST7-9491J-1R656-18CT0-U816")]
 
 [AttributeUsage(AttributeTargets.Assembly)]
+#pragma warning disable CS1591
 public class AssemblyKey : Attribute
 {
     private string m_KeyValue;
@@ -76,4 +77,5 @@ public class AssemblyKey : Attribute
     {
         get { return m_KeyValue; }
     }
+#pragma warning restore
 }

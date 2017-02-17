@@ -30,6 +30,9 @@ using System.Text;
 
 namespace Ekstrand
 {
+    /// <summary>
+    /// Temperature as a value type.
+    /// </summary>
     [Serializable]
     [DebuggerDisplay("{ToString(\"SD\")}")]
     public struct Temperature : IEquatable<Temperature>, IComparable<Temperature>, IFormattable, IConvertible, IComparable
@@ -173,8 +176,7 @@ namespace Ekstrand
         #region Properities
 
         /// <summary>
-        /// The get accessor return a value based on its set temperature scale.
-        /// The set accessor sets the value at the current temperature scale.
+        /// The temperature value in the defined temperature scale.
         /// </summary>
         public double Value
         {
@@ -183,7 +185,7 @@ namespace Ekstrand
         }
 
         /// <summary>
-        /// The get accessor returns the set temperature scale.
+        /// Defined temperature scale.
         /// </summary>
         public TemperatureScaleTypes TemperatureScale
         {
@@ -192,7 +194,7 @@ namespace Ekstrand
         }
 
         /// <summary>
-        /// The get accessor returns the temperature value in Celsius scale.
+        /// Returns the temperature value in Celsius scale.
         /// </summary>
         public double ValueAsCelsius
         {
@@ -200,7 +202,7 @@ namespace Ekstrand
         }
 
         /// <summary>
-        /// The get accessor returns the temperature value in Fahrenheit scale.
+        /// Returns the temperature value in Fahrenheit scale.
         /// </summary>
         public double ValueAsFahrenheit
         {
@@ -208,7 +210,7 @@ namespace Ekstrand
         }
 
         /// <summary>
-        /// The get accessor returns the temperature value in Kelvin scale.
+        /// Returns the temperature value in Kelvin scale.
         /// </summary>
         public double ValueAsKelvin
         {
@@ -216,7 +218,7 @@ namespace Ekstrand
         }
 
         /// <summary>
-        /// The get accessor returns the temperature value in Rankine scale.
+        /// Returns the temperature value in Rankine scale.
         /// </summary>
         public double ValueAsRankine
         {
@@ -227,111 +229,199 @@ namespace Ekstrand
 
         # region Implicit Operators
 
+        /// <summary>
+        /// Converts the Byte to an equivalent Temperature value.
+        /// </summary>
+        /// <param name="value">Byte value</param>
         public static implicit operator Temperature(Byte value)
         {
             return new Temperature(value);
         }
 
+        /// <summary>
+        /// Converts the SByte to an equivalent Temperature value.
+        /// </summary>
+        /// <param name="value">SByte value</param>
         public static implicit operator Temperature(SByte value)
         {
             return new Temperature(value);
         }
 
+        /// <summary>
+        /// Converts the UInt16 to an equivalent Temperature value.
+        /// </summary>
+        /// <param name="value">UInt16 value</param>
         public static implicit operator Temperature(UInt16 value)
         {
             return new Temperature(value);
         }
 
+        /// <summary>
+        /// Converts the UInt32 to an equivalent Temperature value.
+        /// </summary>
+        /// <param name="value">UInt32 value</param>
         public static implicit operator Temperature(UInt32 value)
         {
             return new Temperature(value);
         }
 
+        /// <summary>
+        /// Converts the UInt64 to an equivalent Temperature value.
+        /// </summary>
+        /// <param name="value">UInt64 value</param>
         public static implicit operator Temperature(UInt64 value)
         {
             return new Temperature(value);
         }
 
+        /// <summary>
+        /// Converts the Int16 to an equivalent Temperature value.
+        /// </summary>
+        /// <param name="value">Int16 value</param>
         public static implicit operator Temperature(Int16 value)
         {
             return new Temperature(value);
         }
 
+        /// <summary>
+        /// Converts the Int32 to an equivalent Temperature value.
+        /// </summary>
+        /// <param name="value">Int32 value</param>
         public static implicit operator Temperature(Int32 value)
         {
             return new Temperature(value);
         }
 
+        /// <summary>
+        /// Converts the Int64 to an equivalent Temperature value.
+        /// </summary>
+        /// <param name="value">Int64 value</param>
         public static implicit operator Temperature(Int64 value)
         {
             return new Temperature(value);
         }
 
+        /// <summary>
+        /// Converts the Single to an equivalent Temperature value.
+        /// </summary>
+        /// <param name="value">Single value</param>
         public static implicit operator Temperature(Single value)
         {
             return new Temperature(value);
         }
 
+        /// <summary>
+        /// Converts the Decimal to an equivalent Temperature value.
+        /// </summary>
+        /// <param name="value">Decimal value</param>
         public static implicit operator Temperature(Decimal value)
         {
             return new Temperature(value);
         }
 
+        /// <summary>
+        /// Converts the Double to an equivalent Temperature value.
+        /// </summary>
+        /// <param name="value">Double value</param>
         public static implicit operator Temperature(Double value)
         {
             return new Temperature(value);
         }
 
+        /// <summary>
+        /// Converts the Temperature instance to an equivalent SByte value.
+        /// </summary>
+        /// <param name="value">Temperature value</param>
         public static implicit operator SByte(Temperature value)
         {
             return (SByte)value.Value;
         }
 
+        /// <summary>
+        /// Converts the Temperature instance to an equivalent Byte value.
+        /// </summary>
+        /// <param name="value">Temperature value</param>
         public static implicit operator Byte(Temperature value)
         {
             return (Byte)value.Value;
         }
 
+        /// <summary>
+        /// Converts the Temperature instance to an equivalent UInt16 value.
+        /// </summary>
+        /// <param name="value">Temperature value</param>
         public static implicit operator UInt16(Temperature value)
         {
             return (UInt16)value.Value;
         }
 
+        /// <summary>
+        /// Converts the Temperature instance to an equivalent UInt32 value.
+        /// </summary>
+        /// <param name="value">Temperature value</param>
         public static implicit operator UInt32(Temperature value)
         {
             return (UInt32)value.Value;
         }
 
+        /// <summary>
+        /// Converts the Temperature instance to an equivalent UInt64 value.
+        /// </summary>
+        /// <param name="value">Temperature value</param>
         public static implicit operator UInt64(Temperature value)
         {
             return (UInt64)value.Value;
         }
 
+        /// <summary>
+        /// Converts the Temperature instance to an equivalent Int16 value.
+        /// </summary>
+        /// <param name="value">Temperature value</param>
         public static implicit operator Int16(Temperature value)
         {
             return (Int16)value.Value;
         }
 
+        /// <summary>
+        /// Converts the Temperature instance to an equivalent Int32 value.
+        /// </summary>
+        /// <param name="value">Temperature value</param>
         public static implicit operator Int32(Temperature value)
         {
             return (Int32)value.Value;
         }
 
+        /// <summary>
+        /// Converts the Temperature instance to an equivalent Int64 value.
+        /// </summary>
+        /// <param name="value">Temperature value</param>
         public static implicit operator Int64(Temperature value)
         {
             return (Int64)value.Value;
         }
 
+        /// <summary>
+        /// Converts the Temperature instance to an equivalent Decimal value.
+        /// </summary>
+        /// <param name="value">Temperature value</param>
         public static implicit operator Decimal(Temperature value)
         {
             return (Decimal)value.Value;
         }
 
+        /// <summary>
+        /// Converts the Temperature instance to an equivalent Double value.
+        /// </summary>
+        /// <param name="value">Temperature value</param>
         public static implicit operator Double(Temperature value)
         {
             return value.Value;
         }
 
+        /// <summary>
+        /// Converts the Temperature instance to an equivalent Single value.
+        /// </summary>
+        /// <param name="value">Temperature value</param>
         public static implicit operator Single(Temperature value)
         {
             return (Single)value.Value;
@@ -341,61 +431,131 @@ namespace Ekstrand
 
         #region Operators
 
+        /// <summary>
+        ///  Unary - operation on a temperature type is the temperature negation of the operand.
+        /// </summary>
+        /// <param name="temp">Temperature type</param>
+        /// <returns>Returns the numeric negation.</returns>
         public static Temperature operator -(Temperature temp)
         {
             return new Temperature(-temp.Value);
         }
 
+        /// <summary>
+        /// Unary + operation on a numeric type is just the value of the operand.
+        /// </summary>
+        /// <param name="temp">Temperature type</param>
+        /// <returns>Returns the value of Temperature.</returns>
         public static Temperature operator +(Temperature temp)
         {
             return new Temperature(temp.Value);
         }
 
+        /// <summary>
+        /// Subtract the Right operand from the Left.
+        /// </summary>
+        /// <param name="tempL">Left operand</param>
+        /// <param name="tempR">Right operand</param>
+        /// <returns>Return the subtracted result as Temperature value.</returns>
         public static Temperature operator -(Temperature tempL, Temperature tempR)
         {
             return new Temperature(tempL.Value - tempR.Value);
         }
 
+        /// <summary>
+        /// Computes the sum of its two operands.
+        /// </summary>
+        /// <param name="tempL">Left operand</param>
+        /// <param name="tempR">Right operand</param>
+        /// <returns>Return the sum of the two Temperature values.</returns>
         public static Temperature operator +(Temperature tempL, Temperature tempR)
         {
             return new Temperature(tempL.Value + tempR.Value);
         }
 
+        /// <summary>
+        /// The multiplication operator computes the product of its operands
+        /// </summary>
+        /// <param name="tempL">Left operand</param>
+        /// <param name="tempR">Right operand</param>
+        /// <returns>Return the multiplication result in Temperature value.</returns>
         public static Temperature operator *(Temperature tempL, Temperature tempR)
         {
             return new Temperature(tempL.Value * tempR.Value);
         }
 
+        /// <summary>
+        /// The division operator divides its Left operand by its Right operand
+        /// </summary>
+        /// <param name="numerator">Numerator value</param>
+        /// <param name="denominator">Denominator value</param>
+        /// <returns>Return the resulted division operator as Temperature value.</returns>
         public static Temperature operator /(Temperature numerator, Temperature denominator)
         {
             return new Temperature((double)(numerator.Value / denominator.Value));
         }
 
+        /// <summary>
+        /// The equality operator returns true if the values of its operands are equal, false otherwise.
+        /// </summary>
+        /// <param name="left">Left operand</param>
+        /// <param name="right">Right operand</param>
+        /// <returns>Return the equality boolean value in comparing Temperatures</returns>
         public static Boolean operator ==(Temperature left, Temperature right)
         {
             return left.Equals(right);
         }
 
+        /// <summary>
+        /// The inequality operator returns false if its operands are equal, true otherwise.
+        /// </summary>
+        /// <param name="left">Left operand</param>
+        /// <param name="right">Right operand</param>
+        /// <returns>Return the inequality operator boolean value in comparing Temperatures</returns>
         public static Boolean operator !=(Temperature left, Temperature right)
         {
             return !left.Equals(right);
         }
 
+        /// <summary>
+        /// Relational operator that returns true if the Left operand is greater than the Right, false otherwise.
+        /// </summary>
+        /// <param name="left">Left operand</param>
+        /// <param name="right">Right operand</param>
+        /// <returns>Return the relational boolean value in comparing Temperatures</returns>
         public static Boolean operator >(Temperature left, Temperature right)
         {
             return left.CompareTo(right) > 0;
         }
 
+        /// <summary>
+        /// Relational operator that returns true if the Left operand is less than the Right, false otherwise.
+        /// </summary>
+        /// <param name="left">Left operand</param>
+        /// <param name="right">Right operand</param>
+        /// <returns>Return the relational boolean value in comparing Temperatures</returns>
         public static Boolean operator <(Temperature left, Temperature right)
         {
             return left.CompareTo(right) < 0;
         }
 
+        /// <summary>
+        /// Relational operator that returns true if the Left operand is greater than or equal to the Right, false otherwise.
+        /// </summary>
+        /// <param name="left">Left operand</param>
+        /// <param name="right">Right operand</param>
+        /// <returns>Return the relational boolean value in comparing Temperatures</returns>
         public static Boolean operator >=(Temperature left, Temperature right)
         {
             return left.CompareTo(right) >= 0;
         }
 
+        /// <summary>
+        /// Relational operator that returns true if the Left operand is less than or equal to the Right, false otherwise.
+        /// </summary>
+        /// <param name="left">Left operand</param>
+        /// <param name="right">Right operand</param>
+        /// <returns>Return the relational boolean value in comparing Temperatures</returns>
         public static Boolean operator <=(Temperature left, Temperature right)
         {
             return left.CompareTo(right) <= 0;
@@ -410,7 +570,7 @@ namespace Ekstrand
         /// </summary>
         /// <param name="tempType">Enumeration TemperatureScaleTypes</param>
         /// <remarks>
-        /// Changing the temperature scale would cause the currently value to be recalculated at the new scale.
+        /// Changing the temperature scale would cause the current value to be recalculated at the new scale.
         /// </remarks>
         public void ChangeScale(TemperatureScaleTypes tempType)
         {
@@ -551,8 +711,11 @@ namespace Ekstrand
         /// <summary>
         /// Return a formatted string of this object.
         /// </summary>
-        /// <param name="format">String format values. "S" for scalar only, "SD" for scalar and degree symbol or "N" for scalar value only. </param>
+        /// <param name="format">String format values.</param>
         /// <returns>Return a formatted string based on given format value</returns>
+        ///<remarks>
+        ///Format values: \nS for scalar only \nSD for scalar and degree symbol \nN for scalar value only.
+        ///</remarks>
         public string ToString(String format)
         {
             switch (format)
@@ -577,6 +740,11 @@ namespace Ekstrand
 
         #region Interface Implimentation
 
+        /// <summary>
+        /// Compares this instance to a specified object and returns an indication of their relative values.
+        /// </summary>
+        /// <param name="obj">Object instance.</param>
+        /// <returns>A signed number indicating the relative values of this instance and value.</returns>
         public int CompareTo(object obj)
         {
             if (obj == null)
@@ -589,6 +757,11 @@ namespace Ekstrand
 
         }
 
+        /// <summary>
+        /// Compares this instance to a specified Temperature and returns an indication of their relative values.
+        /// </summary>
+        /// <param name="other">Temperature instance.</param>
+        /// <returns>A signed number indicating the relative values of this instance and value.</returns>
         public int CompareTo(Temperature other)
         {
             if (other == null)
@@ -599,6 +772,11 @@ namespace Ekstrand
             return this.m_TemperatureValue.CompareTo(other.ValueAsCelsius);
         }
 
+        /// <summary>
+        /// Returns a value indicating whether this instance is equal to a specified Temperature value. 
+        /// </summary>
+        /// <param name="other">Temperature instance.</param>
+        /// <returns>true if other is an instance of Temperature and equals the value of this instance; otherwise, false.</returns>
         public bool Equals(Temperature other)
         {
             if (other == null)
@@ -609,91 +787,182 @@ namespace Ekstrand
             return this.m_TemperatureValue.Equals(other.ValueAsCelsius);
         }
 
+        /// <summary>
+        /// Returns the TypeCode for value type Temperature.
+        /// </summary>
+        /// <returns>Returns the TypeCode for value type Temperature.</returns>
         public TypeCode GetTypeCode()
         {
             return TypeCode.Object;
         }
 
+        /// <summary>
+        /// This conversion is not supported.
+        /// </summary>
+        /// <param name="provider">An IFormatProvider interface implementation that supplies culture-specific formatting information. </param>
+        /// <returns>Returns NotSupportedException</returns>
         public bool ToBoolean(IFormatProvider provider)
         {
             throw new NotSupportedException();
         }
 
+        /// <summary>
+        /// This conversion is not supported.
+        /// </summary>
+        /// <param name="provider">An IFormatProvider interface implementation that supplies culture-specific formatting information. </param>
+        /// <returns>Returns NotSupportedException</returns>
         public byte ToByte(IFormatProvider provider)
         {
-            return (byte)m_TemperatureValue;
+            throw new NotSupportedException();
         }
 
+        /// <summary>
+        /// This conversion is not supported.
+        /// </summary>
+        /// <param name="provider">An IFormatProvider interface implementation that supplies culture-specific formatting information. </param>
+        /// <returns>Returns NotSupportedException</returns>
         public char ToChar(IFormatProvider provider)
         {
             throw new NotSupportedException();
         }
 
+        /// <summary>
+        /// This conversion is not supported.
+        /// </summary>
+        /// <param name="provider">An IFormatProvider interface implementation that supplies culture-specific formatting information. </param>
+        /// <returns>Returns NotSupportedException</returns>
         public DateTime ToDateTime(IFormatProvider provider)
         {
             throw new NotSupportedException();
         }
 
+        /// <summary>
+        /// Converts the value of this instance to an equivalent Decimal number using the specified culture-specific formatting information.
+        /// </summary>
+        /// <param name="provider">An IFormatProvider interface implementation that supplies culture-specific formatting information. </param>
+        /// <returns>Return decimal equivalent value.</returns>
         public decimal ToDecimal(IFormatProvider provider)
         {
             return (decimal)m_TemperatureValue;
         }
 
+        /// <summary>
+        /// Converts the value of this instance to an equivalent double-precision floating-point number using the specified culture-specific formatting information.
+        /// </summary>
+        /// <param name="provider"></param>
+        /// <returns>Return double equivalent value.</returns>
         public double ToDouble(IFormatProvider provider)
         {
             return (double)m_TemperatureValue;
         }
 
+        /// <summary>
+        /// Converts the value of this instance to an equivalent 16-bit signed integer using the specified culture-specific formatting information
+        /// </summary>
+        /// <param name="provider">An IFormatProvider interface implementation that supplies culture-specific formatting information. </param>
+        /// <returns>Return Int16 equivalent value.</returns>
         public short ToInt16(IFormatProvider provider)
         {
             return (Int16)m_TemperatureValue;
         }
 
+        /// <summary>
+        /// Converts the value of this instance to an equivalent 32-bit signed integer using the specified culture-specific formatting information.
+        /// </summary>
+        /// <param name="provider">An IFormatProvider interface implementation that supplies culture-specific formatting information. </param>
+        /// <returns>Return Int32 equivalent value.</returns>
         public int ToInt32(IFormatProvider provider)
         {
             return (Int32)m_TemperatureValue;
         }
 
+        /// <summary>
+        /// Converts the value of this instance to an equivalent 64-bit signed integer using the specified culture-specific formatting information.
+        /// </summary>
+        /// <param name="provider">An IFormatProvider interface implementation that supplies culture-specific formatting information. </param>
+        /// <returns>Return Int64 equivalent value.</returns>
         public long ToInt64(IFormatProvider provider)
         {
             return (Int64)m_TemperatureValue;
         }
 
+        /// <summary>
+        /// Converts the value of this instance to an equivalent 8-bit signed integer using the specified culture-specific formatting information.
+        /// </summary>
+        /// <param name="provider">An IFormatProvider interface implementation that supplies culture-specific formatting information. </param>
+        /// <returns>Return SBtye equivalent value.</returns>
         public sbyte ToSByte(IFormatProvider provider)
         {
             return (sbyte)m_TemperatureValue;
         }
 
+        /// <summary>
+        /// Converts the value of this instance to an equivalent single-precision floating-point number using the specified culture-specific formatting information.
+        /// </summary>
+        /// <param name="provider">An IFormatProvider interface implementation that supplies culture-specific formatting information. </param>
+        /// <returns>Return float equivalent value.</returns>
         public float ToSingle(IFormatProvider provider)
         {
             return (float)m_TemperatureValue;
         }
 
+        /// <summary>
+        /// Converts the value of this instance to an equivalent String using the specified culture-specific formatting information.
+        /// </summary>
+        /// <param name="provider">An IFormatProvider interface implementation that supplies culture-specific formatting information. </param>
+        /// <returns>Return String equivalent value.</returns>
         public string ToString(IFormatProvider provider)
         {
             return this.ToString(provider);
         }
 
+        /// <summary>
+        /// Converts the value of this instance to an equivalent String using the specified format and culture-specific formatting information.
+        /// </summary>
+        /// <param name="format">String format.</param>
+        /// <param name="formatProvider">An IFormatProvider interface implementation that supplies culture-specific formatting information. </param>
+        /// <returns>Return String equivalent value.</returns>
         public string ToString(string format, IFormatProvider formatProvider)
         {
             return this.ToString(format, formatProvider);
         }
 
+        /// <summary>
+        /// Converts the value of this instance to an Object of the specified Type that has an equivalent value, using the specified culture-specific formatting information.
+        /// </summary>
+        /// <param name="conversionType">The Type to which the value of this instance is converted. </param>
+        /// <param name="provider">An IFormatProvider interface implementation that supplies culture-specific formatting information. </param>
+        /// <returns>An Object instance of type conversionType whose value is equivalent to the value of this instance.</returns>
         public object ToType(Type conversionType, IFormatProvider provider)
         {
             throw new NotSupportedException();
         }
 
+        /// <summary>
+        /// Converts the value of this instance to an equivalent 16-bit unsigned integer using the specified culture-specific formatting information.
+        /// </summary>
+        /// <param name="provider">An IFormatProvider interface implementation that supplies culture-specific formatting information. </param>
+        /// <returns>An 16-bit unsigned integer equivalent to the value of this instance.</returns>
         public ushort ToUInt16(IFormatProvider provider)
         {
             return (UInt16)m_TemperatureValue;
         }
 
+        /// <summary>
+        /// Converts the value of this instance to an equivalent 32-bit unsigned integer using the specified culture-specific formatting information.
+        /// </summary>
+        /// <param name="provider">An IFormatProvider interface implementation that supplies culture-specific formatting information. </param>
+        /// <returns>An 32-bit unsigned integer equivalent to the value of this instance.</returns>
         public uint ToUInt32(IFormatProvider provider)
         {
             return (UInt32)m_TemperatureValue;
         }
 
+        /// <summary>
+        /// Converts the value of this instance to an equivalent 64-bit unsigned integer using the specified culture-specific formatting information.
+        /// </summary>
+        /// <param name="provider">An IFormatProvider interface implementation that supplies culture-specific formatting information. </param>
+        /// <returns>An 64-bit unsigned integer equivalent to the value of this instance.</returns>
         public ulong ToUInt64(IFormatProvider provider)
         {
             return (UInt64)m_TemperatureValue;
@@ -703,6 +972,10 @@ namespace Ekstrand
 
     }
 
+    /// <summary>
+    /// Enumeration of temperature scale types.
+    /// </summary>
+#pragma warning disable CS1591
     public enum TemperatureScaleTypes
     {
         Celsius = 0,

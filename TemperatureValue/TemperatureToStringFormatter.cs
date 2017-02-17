@@ -40,6 +40,13 @@ namespace Ekstrand
         private const string RankineDegreeSymbol = " °R";
 
         /// <summary>
+        /// Crate an instance of TemperatureToStringFormatter
+        /// </summary>
+        public TemperatureToStringFormatter()
+        { }
+
+        
+        /// <summary>
         /// IFormatProvider interface implementation
         /// </summary>
         /// <param name="formatType">Type of formatter provider</param>
