@@ -1,0 +1,16 @@
+C:\Users\frede\Documents\GitHub\TemperatureValue\TemperatureValueTester\bin\Release\TemperatureValueTester.dll
+C:\Users\frede\Documents\GitHub\TemperatureValue\TemperatureValueTester\bin\Release\TemperatureValueTester.pdb
+C:\Users\frede\Documents\GitHub\TemperatureValue\TemperatureValueTester\bin\Release\Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll
+C:\Users\frede\Documents\GitHub\TemperatureValue\TemperatureValueTester\bin\Release\nunit.framework.dll
+C:\Users\frede\Documents\GitHub\TemperatureValue\TemperatureValueTester\bin\Release\NUnit3.TestAdapter.dll
+C:\Users\frede\Documents\GitHub\TemperatureValue\TemperatureValueTester\bin\Release\TemperatureValue.dll
+C:\Users\frede\Documents\GitHub\TemperatureValue\TemperatureValueTester\bin\Release\Mono.Cecil.dll
+C:\Users\frede\Documents\GitHub\TemperatureValue\TemperatureValueTester\bin\Release\nunit.engine.api.dll
+C:\Users\frede\Documents\GitHub\TemperatureValue\TemperatureValueTester\bin\Release\nunit.engine.dll
+C:\Users\frede\Documents\GitHub\TemperatureValue\TemperatureValueTester\bin\Release\Mono.Cecil.Rocks.dll
+C:\Users\frede\Documents\GitHub\TemperatureValue\TemperatureValueTester\bin\Release\nunit.framework.xml
+C:\Users\frede\Documents\GitHub\TemperatureValue\TemperatureValueTester\bin\Release\TemperatureValue.pdb
+C:\Users\frede\Documents\GitHub\TemperatureValue\TemperatureValueTester\bin\Release\TemperatureValue.xml
+C:\Users\frede\Documents\GitHub\TemperatureValue\TemperatureValueTester\obj\Release\TemperatureValueTester.csprojResolveAssemblyReference.cache
+C:\Users\frede\Documents\GitHub\TemperatureValue\TemperatureValueTester\obj\Release\TemperatureValueTester.dll
+C:\Users\frede\Documents\GitHub\TemperatureValue\TemperatureValueTester\obj\Release\TemperatureValueTester.pdb

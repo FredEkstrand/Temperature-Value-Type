@@ -31,30 +31,51 @@ using System.Text;
 namespace Ekstrand
 {
     /// <summary>
+    /// Enumeration of temperature scale types.
+    /// </summary>
+#pragma warning disable CS1591
+    public enum TemperatureScaleTypes
+    {
+        Celsius = 0,
+        Fahrenheit,
+        Kelvin,
+        Rankine // Yah. Still in use here in the USA
+                // Delisle, Newton, Réaumur, Rømer are scales that are no longer in use.
+    }
+#pragma warning restore
+
+    /// <summary>
     /// Temperature as a value type.
     /// </summary>
     [Serializable]
     [DebuggerDisplay("{ToString(\"SD\")}")]
     public struct Temperature : IEquatable<Temperature>, IComparable<Temperature>, IFormattable, IConvertible, IComparable
     {
-        #region Structure level global varables and objects.
+        #region Structure level global variables and objects.
+
+        #region Fields
+
+        /// <summary>
+        /// Maximum value for a Temperature.
+        /// </summary>
+        public const double MaxValue = 1.7976931348623157E+308;
 
         /// <summary>
         /// Minimum value for a Temperature.
         /// </summary>
         public const double MinValue = -1.7976931348623157E+308;
-        /// <summary>
-        /// Maximum value for a Temperature.
-        /// </summary>
-        public const double MaxValue =  1.7976931348623157E+308;
+        private TemperatureScaleTypes m_TemperatureType;
+        private double m_TemperatureValue;
 
-        private double m_TemperatureValue;                  // scaled to Celsius
-        private TemperatureScaleTypes m_TemperatureType;    // temperature scale
+        #endregion Fields
+
+        // scaled to Celsius
+        // temperature scale
 
         #endregion
 
         #region Constructors
-    
+
         /// <summary>
         /// Create a new instance of Temperature with a Celsius value.
         /// </summary>
@@ -64,9 +85,12 @@ namespace Ekstrand
             if (!IsNumeric(value))
             { throw new ArgumentException("Value is not a number."); }
 
-            this.m_TemperatureValue = 0;
-            this.m_TemperatureType = TemperatureScaleTypes.Celsius;
+            
+            m_TemperatureValue = 0;
+            m_TemperatureType = TemperatureScaleTypes.Celsius;
+            ValidateValue(value);
             RescaleToCelsius(Convert.ToDouble(value), m_TemperatureType);
+
         }
 
         /// <summary>
@@ -75,8 +99,9 @@ namespace Ekstrand
         /// <param name="value">Enumeration TemperatureTypes</param>
         public Temperature(TemperatureScaleTypes value)
         {
-            this.m_TemperatureValue = 0;
-            this.m_TemperatureType = value;
+            m_TemperatureValue = 0;
+            m_TemperatureType = value;
+            ValidateValue(value);
             RescaleToCelsius(0, m_TemperatureType);
         }
 
@@ -90,99 +115,15 @@ namespace Ekstrand
             if (!IsNumeric(value))
             { throw new ArgumentException("Value is not a number."); }
 
-            this.m_TemperatureValue = 0;
-            this.m_TemperatureType = temp; 
+            m_TemperatureValue = 0;
+            m_TemperatureType = temp;
+            ValidateValue(value);
             RescaleToCelsius(Convert.ToDouble(value), m_TemperatureType);
         }
 
-        #endregion
+        #endregion Constructors
 
-        #region Private Methods
-
-        /// <summary>
-        /// Check if given ValueType is a numeric type.
-        /// </summary>
-        /// <param name="value">ValueType to be type queried.</param>
-        /// <returns>True iff ValueType given is a numeric type otherwise false.</returns>
-        private static bool IsNumeric(ValueType value)
-        {
-            if (value is SByte ||
-                value is Byte ||
-                value is Decimal ||
-                value is Double ||
-                value is UInt16 ||
-                value is UInt32 ||
-                value is UInt64 ||
-                value is Int16 ||
-                value is Int32 ||
-                value is Int64 ||
-                value is Single
-              )
-            {
-                return true;
-            }
-            return false;
-        }
-
-        /// <summary>
-        /// Rescale given value to Celsius.
-        /// </summary>
-        /// <param name="value">Double value to be rescaled.</param>
-        /// <param name="tempType">TemperatureScaleType the given value is in.</param>
-        private void RescaleToCelsius(double value, TemperatureScaleTypes tempType)
-        {
-            switch (tempType)
-            {
-                case TemperatureScaleTypes.Celsius:
-                    this.m_TemperatureValue = Math.Round((value), 4, MidpointRounding.AwayFromZero);
-                    break;
-                case TemperatureScaleTypes.Fahrenheit:
-                    this.m_TemperatureValue = Math.Round((value - 32) * .555555555, 4, MidpointRounding.AwayFromZero);
-                    break;
-                case TemperatureScaleTypes.Kelvin:
-                    this.m_TemperatureValue = Math.Round((value - 273.15), 4, MidpointRounding.AwayFromZero);
-                    break;
-                case TemperatureScaleTypes.Rankine:
-                    this.m_TemperatureValue = Math.Round((value - 491.67) * .555555555, 4, MidpointRounding.AwayFromZero);                   
-                    break;
-            }
-        }
-
-        /// <summary>
-        /// Rescale from Celsius to any of the supported temperature scales.
-        /// </summary>
-        /// <param name="tempType">TemperatureScaleTypes to rescale to.</param>
-        /// <returns>Returns the internal Celsius value rescaled to the given TemperatureScaleTypes value.</returns>
-        private double RescaleFromCelsius(TemperatureScaleTypes tempType)
-        {
-            switch (tempType)
-            {
-                case TemperatureScaleTypes.Celsius:
-                    return m_TemperatureValue;
-                case TemperatureScaleTypes.Fahrenheit:
-                    return Math.Round((m_TemperatureValue * 1.80000) + 32,4,MidpointRounding.AwayFromZero);
-                case TemperatureScaleTypes.Kelvin:
-                    return Math.Round(m_TemperatureValue + 273.15, 4, MidpointRounding.AwayFromZero);
-                case TemperatureScaleTypes.Rankine:
-                    return Math.Round((m_TemperatureValue + 273.15) * 1.80000, 4, MidpointRounding.AwayFromZero);
-            }
-
-            // should never get here
-            return MinValue;
-        }
-
-        #endregion
-
-        #region Properities
-
-        /// <summary>
-        /// The temperature value in the defined temperature scale.
-        /// </summary>
-        public double Value
-        {
-            get { return RescaleFromCelsius(this.m_TemperatureType); }
-            set { RescaleToCelsius(value,this.m_TemperatureType); }
-        }
+        #region Properties
 
         /// <summary>
         /// Defined temperature scale.
@@ -191,6 +132,19 @@ namespace Ekstrand
         {
             get { return this.m_TemperatureType; }
             internal set { this.m_TemperatureType = value; }
+        }
+
+        /// <summary>
+        /// The temperature value in the defined temperature scale.
+        /// </summary>
+        public double Value
+        {
+            get { return RescaleFromCelsius(this.m_TemperatureType); }
+            set
+            {
+                ValidateValue(value);
+                RescaleToCelsius(value, this.m_TemperatureType);
+            }
         }
 
         /// <summary>
@@ -225,9 +179,113 @@ namespace Ekstrand
             get { return RescaleFromCelsius(TemperatureScaleTypes.Rankine); }
         }
 
-        #endregion
+        internal double ValueInternal
+        {
+            get
+            {
+                return m_TemperatureValue;
+            }
+            set
+            {
+                ValidateValue(value);
+                m_TemperatureValue = value;
+            }
+        }
+        #endregion Properties
 
-        # region Implicit Operators
+        #region Methods
+
+        /// <summary>
+        /// Returns the smallest integral value that is greater than or equal to the specified temperature number.
+        /// </summary>
+        /// <param name="value">A Temperature value type.</param>
+        /// <returns>The smallest integral value that is greater than or equal to <i>value</i>.</returns>
+        public static Temperature Ceiling(Temperature value)
+        {
+            return new Temperature(Math.Ceiling(value.ValueInternal));
+        }
+
+        /// <summary>
+        /// Returns the largest integer less than or equal to the specified temperature number.
+        /// </summary>
+        /// <param name="value">A Temperature value type.</param>
+        /// <returns>The largest integer less than or equal to <i>value</i>.</returns>
+        public static Temperature Floor(Temperature value)
+        {
+            return new Temperature(Math.Floor(value.ValueInternal));
+        }
+
+        /// <summary>
+        /// Converts the Temperature instance to an equivalent Byte value.
+        /// </summary>
+        /// <param name="value">Temperature value</param>
+        public static implicit operator Byte(Temperature value)
+        {
+            return (Byte)value.Value;
+        }
+
+        /// <summary>
+        /// Converts the Temperature instance to an equivalent Decimal value.
+        /// </summary>
+        /// <param name="value">Temperature value</param>
+        public static implicit operator Decimal(Temperature value)
+        {
+            return (Decimal)value.Value;
+        }
+
+        /// <summary>
+        /// Converts the Temperature instance to an equivalent Double value.
+        /// </summary>
+        /// <param name="value">Temperature value</param>
+        public static implicit operator Double(Temperature value)
+        {
+            return value.Value;
+        }
+
+        /// <summary>
+        /// Converts the Temperature instance to an equivalent Int16 value.
+        /// </summary>
+        /// <param name="value">Temperature value</param>
+        public static implicit operator Int16(Temperature value)
+        {
+            return (Int16)value.Value;
+        }
+
+        /// <summary>
+        /// Converts the Temperature instance to an equivalent Int32 value.
+        /// </summary>
+        /// <param name="value">Temperature value</param>
+        public static implicit operator Int32(Temperature value)
+        {
+            return (Int32)value.Value;
+        }
+
+        /// <summary>
+        /// Converts the Temperature instance to an equivalent Int64 value.
+        /// </summary>
+        /// <param name="value">Temperature value</param>
+        public static implicit operator Int64(Temperature value)
+        {
+            return (Int64)value.Value;
+        }
+
+        /// <summary>
+        /// Converts the Temperature instance to an equivalent SByte value.
+        /// </summary>
+        /// <param name="value">Temperature value</param>
+        public static implicit operator SByte(Temperature value)
+        {
+            return (SByte)value.Value;
+        }
+
+        /// <summary>
+        /// Converts the Temperature instance to an equivalent Single value.
+        /// </summary>
+        /// <param name="value">Temperature value</param>
+        public static implicit operator Single(Temperature value)
+        {
+            return (Single)value.Value;
+        }
 
         /// <summary>
         /// Converts the Byte to an equivalent Temperature value.
@@ -329,24 +387,6 @@ namespace Ekstrand
         }
 
         /// <summary>
-        /// Converts the Temperature instance to an equivalent SByte value.
-        /// </summary>
-        /// <param name="value">Temperature value</param>
-        public static implicit operator SByte(Temperature value)
-        {
-            return (SByte)value.Value;
-        }
-
-        /// <summary>
-        /// Converts the Temperature instance to an equivalent Byte value.
-        /// </summary>
-        /// <param name="value">Temperature value</param>
-        public static implicit operator Byte(Temperature value)
-        {
-            return (Byte)value.Value;
-        }
-
-        /// <summary>
         /// Converts the Temperature instance to an equivalent UInt16 value.
         /// </summary>
         /// <param name="value">Temperature value</param>
@@ -374,64 +414,6 @@ namespace Ekstrand
         }
 
         /// <summary>
-        /// Converts the Temperature instance to an equivalent Int16 value.
-        /// </summary>
-        /// <param name="value">Temperature value</param>
-        public static implicit operator Int16(Temperature value)
-        {
-            return (Int16)value.Value;
-        }
-
-        /// <summary>
-        /// Converts the Temperature instance to an equivalent Int32 value.
-        /// </summary>
-        /// <param name="value">Temperature value</param>
-        public static implicit operator Int32(Temperature value)
-        {
-            return (Int32)value.Value;
-        }
-
-        /// <summary>
-        /// Converts the Temperature instance to an equivalent Int64 value.
-        /// </summary>
-        /// <param name="value">Temperature value</param>
-        public static implicit operator Int64(Temperature value)
-        {
-            return (Int64)value.Value;
-        }
-
-        /// <summary>
-        /// Converts the Temperature instance to an equivalent Decimal value.
-        /// </summary>
-        /// <param name="value">Temperature value</param>
-        public static implicit operator Decimal(Temperature value)
-        {
-            return (Decimal)value.Value;
-        }
-
-        /// <summary>
-        /// Converts the Temperature instance to an equivalent Double value.
-        /// </summary>
-        /// <param name="value">Temperature value</param>
-        public static implicit operator Double(Temperature value)
-        {
-            return value.Value;
-        }
-
-        /// <summary>
-        /// Converts the Temperature instance to an equivalent Single value.
-        /// </summary>
-        /// <param name="value">Temperature value</param>
-        public static implicit operator Single(Temperature value)
-        {
-            return (Single)value.Value;
-        }
-
-        #endregion
-
-        #region Operators
-
-        /// <summary>
         ///  Unary - operation on a temperature type is the temperature negation of the operand.
         /// </summary>
         /// <param name="temp">Temperature type</param>
@@ -439,6 +421,50 @@ namespace Ekstrand
         public static Temperature operator -(Temperature temp)
         {
             return new Temperature(-temp.Value);
+        }
+
+        /// <summary>
+        /// Subtract the Right operand from the Left.
+        /// </summary>
+        /// <param name="tempL">Left operand</param>
+        /// <param name="tempR">Right operand</param>
+        /// <returns>Return the subtracted result as Temperature value.</returns>
+        public static Temperature operator -(Temperature tempL, Temperature tempR)
+        {
+            return new Temperature(tempL.ValueInternal - tempR.ValueInternal);
+        }
+
+        /// <summary>
+        /// The inequality operator returns false if its operands are equal, true otherwise.
+        /// </summary>
+        /// <param name="left">Left operand</param>
+        /// <param name="right">Right operand</param>
+        /// <returns>Return the inequality operator boolean value in comparing Temperatures</returns>
+        public static Boolean operator !=(Temperature left, Temperature right)
+        {
+            return !left.ValueInternal.Equals(right.ValueInternal);
+        }
+
+        /// <summary>
+        /// The multiplication operator computes the product of its operands
+        /// </summary>
+        /// <param name="tempL">Left operand</param>
+        /// <param name="tempR">Right operand</param>
+        /// <returns>Return the multiplication result in Temperature value.</returns>
+        public static Temperature operator *(Temperature tempL, Temperature tempR)
+        {
+            return new Temperature(tempL.ValueInternal * tempR.ValueInternal);
+        }
+
+        /// <summary>
+        /// The division operator divides its Left operand by its Right operand
+        /// </summary>
+        /// <param name="numerator">Numerator value</param>
+        /// <param name="denominator">Denominator value</param>
+        /// <returns>Return the resulted division operator as Temperature value.</returns>
+        public static Temperature operator /(Temperature numerator, Temperature denominator)
+        {
+            return new Temperature((double)(numerator.ValueInternal / denominator.ValueInternal));
         }
 
         /// <summary>
@@ -452,17 +478,6 @@ namespace Ekstrand
         }
 
         /// <summary>
-        /// Subtract the Right operand from the Left.
-        /// </summary>
-        /// <param name="tempL">Left operand</param>
-        /// <param name="tempR">Right operand</param>
-        /// <returns>Return the subtracted result as Temperature value.</returns>
-        public static Temperature operator -(Temperature tempL, Temperature tempR)
-        {
-            return new Temperature(tempL.Value - tempR.Value);
-        }
-
-        /// <summary>
         /// Computes the sum of its two operands.
         /// </summary>
         /// <param name="tempL">Left operand</param>
@@ -470,62 +485,7 @@ namespace Ekstrand
         /// <returns>Return the sum of the two Temperature values.</returns>
         public static Temperature operator +(Temperature tempL, Temperature tempR)
         {
-            return new Temperature(tempL.Value + tempR.Value);
-        }
-
-        /// <summary>
-        /// The multiplication operator computes the product of its operands
-        /// </summary>
-        /// <param name="tempL">Left operand</param>
-        /// <param name="tempR">Right operand</param>
-        /// <returns>Return the multiplication result in Temperature value.</returns>
-        public static Temperature operator *(Temperature tempL, Temperature tempR)
-        {
-            return new Temperature(tempL.Value * tempR.Value);
-        }
-
-        /// <summary>
-        /// The division operator divides its Left operand by its Right operand
-        /// </summary>
-        /// <param name="numerator">Numerator value</param>
-        /// <param name="denominator">Denominator value</param>
-        /// <returns>Return the resulted division operator as Temperature value.</returns>
-        public static Temperature operator /(Temperature numerator, Temperature denominator)
-        {
-            return new Temperature((double)(numerator.Value / denominator.Value));
-        }
-
-        /// <summary>
-        /// The equality operator returns true if the values of its operands are equal, false otherwise.
-        /// </summary>
-        /// <param name="left">Left operand</param>
-        /// <param name="right">Right operand</param>
-        /// <returns>Return the equality boolean value in comparing Temperatures</returns>
-        public static Boolean operator ==(Temperature left, Temperature right)
-        {
-            return left.Equals(right);
-        }
-
-        /// <summary>
-        /// The inequality operator returns false if its operands are equal, true otherwise.
-        /// </summary>
-        /// <param name="left">Left operand</param>
-        /// <param name="right">Right operand</param>
-        /// <returns>Return the inequality operator boolean value in comparing Temperatures</returns>
-        public static Boolean operator !=(Temperature left, Temperature right)
-        {
-            return !left.Equals(right);
-        }
-
-        /// <summary>
-        /// Relational operator that returns true if the Left operand is greater than the Right, false otherwise.
-        /// </summary>
-        /// <param name="left">Left operand</param>
-        /// <param name="right">Right operand</param>
-        /// <returns>Return the relational boolean value in comparing Temperatures</returns>
-        public static Boolean operator >(Temperature left, Temperature right)
-        {
-            return left.CompareTo(right) > 0;
+            return new Temperature(tempL.ValueInternal + tempR.ValueInternal);
         }
 
         /// <summary>
@@ -536,18 +496,7 @@ namespace Ekstrand
         /// <returns>Return the relational boolean value in comparing Temperatures</returns>
         public static Boolean operator <(Temperature left, Temperature right)
         {
-            return left.CompareTo(right) < 0;
-        }
-
-        /// <summary>
-        /// Relational operator that returns true if the Left operand is greater than or equal to the Right, false otherwise.
-        /// </summary>
-        /// <param name="left">Left operand</param>
-        /// <param name="right">Right operand</param>
-        /// <returns>Return the relational boolean value in comparing Temperatures</returns>
-        public static Boolean operator >=(Temperature left, Temperature right)
-        {
-            return left.CompareTo(right) >= 0;
+            return left.ValueInternal.CompareTo(right.ValueInternal) < 0;
         }
 
         /// <summary>
@@ -558,69 +507,84 @@ namespace Ekstrand
         /// <returns>Return the relational boolean value in comparing Temperatures</returns>
         public static Boolean operator <=(Temperature left, Temperature right)
         {
-            return left.CompareTo(right) <= 0;
-        }
-
-        #endregion
-
-        #region Public Methods
-
-        /// <summary>
-        /// Change the current temperature scale to another.
-        /// </summary>
-        /// <param name="tempType">Enumeration TemperatureScaleTypes</param>
-        /// <remarks>
-        /// Changing the temperature scale would cause the current value to be recalculated at the new scale.
-        /// </remarks>
-        public void ChangeScale(TemperatureScaleTypes tempType)
-        {
-            double tempVal = this.m_TemperatureValue;
-            m_TemperatureValue = 0;
-            this.m_TemperatureType = tempType;
-            RescaleToCelsius(tempVal, this.m_TemperatureType);
+            return left.ValueInternal.CompareTo(right.ValueInternal) <= 0;
         }
 
         /// <summary>
-        /// Change the current temperature value and scale.
+        /// The equality operator returns true if the values of its operands are equal, false otherwise.
         /// </summary>
-        /// <param name="value">ValueType for temperature.</param>
-        /// <param name="tempType">Enumeration TemperatureTypes</param>
-        public void ChangeScale(ValueType value, TemperatureScaleTypes tempType)
+        /// <param name="left">Left operand</param>
+        /// <param name="right">Right operand</param>
+        /// <returns>Return the equality boolean value in comparing Temperatures</returns>
+        public static Boolean operator ==(Temperature left, Temperature right)
         {
-            if (!IsNumeric(value))
-            { throw new ArgumentException("Value is not a number."); }
-
-            double tempVal = Convert.ToDouble(value);
-            this.m_TemperatureValue = 0;
-            this.m_TemperatureType = tempType;
-            RescaleToCelsius(tempVal,this.m_TemperatureType);
+            return left.ValueInternal.Equals(right.ValueInternal);
         }
 
         /// <summary>
-        /// Determines whether the specified object is equal to the current object.
+        /// Relational operator that returns true if the Left operand is greater than the Right, false otherwise.
         /// </summary>
-        /// <param name="obj">The object to compare with the current object. </param>
-        /// <returns>true if the specified object is equal to the current object; otherwise, false.</returns>
-        public override Boolean Equals(Object obj)
+        /// <param name="left">Left operand</param>
+        /// <param name="right">Right operand</param>
+        /// <returns>Return the relational boolean value in comparing Temperatures</returns>
+        public static Boolean operator >(Temperature left, Temperature right)
         {
-            if (!(obj is Temperature))
-            {
-                return false;
-            }
-
-            double other = (Temperature)obj;
-            return Equals(Math.Round(other,4));
+            return left.ValueInternal.CompareTo(right.ValueInternal) > 0;
         }
 
-
+        /// <summary>
+        /// Relational operator that returns true if the Left operand is greater than or equal to the Right, false otherwise.
+        /// </summary>
+        /// <param name="left">Left operand</param>
+        /// <param name="right">Right operand</param>
+        /// <returns>Return the relational boolean value in comparing Temperatures</returns>
+        public static Boolean operator >=(Temperature left, Temperature right)
+        {
+            return left.ValueInternal.CompareTo(right.ValueInternal) >= 0;
+        }
 
         /// <summary>
-        /// Serves as the default hash function. 
+        /// Rounds a temperature value to the nearest integral value.
         /// </summary>
-        /// <returns>A hash code for the current object.</returns>
-        public override Int32 GetHashCode()
+        /// <param name="value">A temperature number to be rounded. </param>
+        /// <returns>The temperature nearest <i>value</i>. If the fractional component of <i>value</i> is halfway between two integers, one of which is even and the other odd, then the even number is returned.</returns>
+        public static Temperature Round(Temperature value)
         {
-            return Value.GetHashCode();
+            return new Temperature(Math.Round(value.ValueInternal));
+        }
+
+        /// <summary>
+        /// Rounds a temperature value to a specified number of fractional digits.
+        /// </summary>
+        /// <param name="value">A temperature number to be rounded.</param>
+        /// <param name="digits">The number of fractional digits in the return value. </param>
+        /// <returns>The number nearest to <i>value</i> that contains a number of fractional digits equal to digits.</returns>
+        public static Temperature Round(Temperature value, Int32 digits)
+        {
+            return new Temperature(Math.Round(value.ValueInternal, digits));
+        }
+
+        /// <summary>
+        /// Rounds a temperature value to a specified number of fractional digits. A parameter specifies how to round the value if it is midway between two numbers.
+        /// </summary>
+        /// <param name="value">A temperature number to be rounded.</param>
+        /// <param name="digits">The number of fractional digits in the return value. </param>
+        /// <param name="mpd">Specification for how to round value if it is midway between two other numbers.</param>
+        /// <returns>The temperature nearest <i>value</i>. If the fractional component of <i>value</i> is halfway between two integers, one of which is even and the other odd, then the even number is returned.</returns>
+        public static Temperature Round(Temperature value, Int32 digits, MidpointRounding mpd)
+        {
+            return new Temperature(Math.Round(value.ValueInternal, digits, mpd));
+        }
+
+        /// <summary>
+        /// Rounds a temperature value to the nearest integer. A parameter specifies how to round the value if it is midway between two numbers.
+        /// </summary>
+        /// <param name="value">A temperature number to be rounded.</param>
+        /// <param name="mpd">Specification for how to round value if it is midway between two other numbers.</param>
+        /// <returns></returns>
+        public static Temperature Round(Temperature value, MidpointRounding mpd)
+        {
+            return new Temperature(Math.Round(value.ValueInternal, mpd));
         }
 
         /// <summary>
@@ -700,45 +664,35 @@ namespace Ekstrand
         }
 
         /// <summary>
-        /// Return a formatted string of this object.
+        /// Change the current temperature scale to another.
         /// </summary>
-        /// <returns>Returns a string representation of this Temperature value.</returns>
-        public override string ToString()
+        /// <param name="tempType">Enumeration TemperatureScaleTypes</param>
+        /// <remarks>
+        /// Changing the temperature scale would cause the current value to be recalculated at the new scale.
+        /// </remarks>
+        public void ChangeScale(TemperatureScaleTypes tempType)
         {
-            return String.Format(new TemperatureToStringFormatter(), "{0:SD}", this);
+            double tempVal = this.m_TemperatureValue;
+            m_TemperatureValue = 0;
+            this.m_TemperatureType = tempType;
+            RescaleToCelsius(tempVal, this.m_TemperatureType);
         }
 
         /// <summary>
-        /// Return a formatted string of this object.
+        /// Change the current temperature value and scale.
         /// </summary>
-        /// <param name="format">String format values.</param>
-        /// <returns>Return a formatted string based on given format value</returns>
-        ///<remarks>
-        ///Format values: \nS for scalar only \nSD for scalar and degree symbol \nN for scalar value only.
-        ///</remarks>
-        public string ToString(String format)
+        /// <param name="value">ValueType for temperature.</param>
+        /// <param name="tempType">Enumeration TemperatureTypes</param>
+        public void ChangeScale(ValueType value, TemperatureScaleTypes tempType)
         {
-            switch (format)
-            {
-                case "S":
-                    return String.Format(new TemperatureToStringFormatter(), "{0:S}", this);
-                case "SD":
-                    return String.Format(new TemperatureToStringFormatter(), "{0:SD}", this);
-                case "N":
-                    return String.Format(new TemperatureToStringFormatter(), "{0:N}", this);
-                case "SN":
-                    return String.Format(new TemperatureToStringFormatter(), "{0:SN}", this);
-                case "SDN":
-                    return String.Format(new TemperatureToStringFormatter(), "{0:SDN}", this);
-            }
+            if (!IsNumeric(value))
+            { throw new ArgumentException("Value is not a number."); }
 
-            throw new FormatException("Invalid format parameter: " + format);
+            double tempVal = Convert.ToDouble(value);
+            this.m_TemperatureValue = 0;
+            this.m_TemperatureType = tempType;
+            RescaleToCelsius(tempVal, this.m_TemperatureType);
         }
-
-
-        #endregion
-
-        #region Interface Implimentation
 
         /// <summary>
         /// Compares this instance to a specified object and returns an indication of their relative values.
@@ -773,6 +727,22 @@ namespace Ekstrand
         }
 
         /// <summary>
+        /// Determines whether the specified object is equal to the current object.
+        /// </summary>
+        /// <param name="obj">The object to compare with the current object. </param>
+        /// <returns>true if the specified object is equal to the current object; otherwise, false.</returns>
+        public override Boolean Equals(Object obj)
+        {
+            if (!(obj is Temperature))
+            {
+                return false;
+            }
+
+            Temperature other = (Temperature)obj;
+            return Equals(Math.Round(other.ValueInternal, 4));
+        }
+
+        /// <summary>
         /// Returns a value indicating whether this instance is equal to a specified Temperature value. 
         /// </summary>
         /// <param name="other">Temperature instance.</param>
@@ -784,7 +754,16 @@ namespace Ekstrand
                 throw new NullReferenceException();
             }
 
-            return this.m_TemperatureValue.Equals(other.ValueAsCelsius);
+            return this.m_TemperatureValue.Equals(other.ValueInternal);
+        }
+
+        /// <summary>
+        /// Serves as the default hash function. 
+        /// </summary>
+        /// <returns>A hash code for the current object.</returns>
+        public override Int32 GetHashCode()
+        {
+            return Value.GetHashCode();
         }
 
         /// <summary>
@@ -803,7 +782,7 @@ namespace Ekstrand
         /// <returns>Returns NotSupportedException</returns>
         public bool ToBoolean(IFormatProvider provider)
         {
-            throw new NotSupportedException();
+            throw new  InvalidCastException();
         }
 
         /// <summary>
@@ -813,7 +792,7 @@ namespace Ekstrand
         /// <returns>Returns NotSupportedException</returns>
         public byte ToByte(IFormatProvider provider)
         {
-            throw new NotSupportedException();
+            throw new OverflowException();
         }
 
         /// <summary>
@@ -823,7 +802,7 @@ namespace Ekstrand
         /// <returns>Returns NotSupportedException</returns>
         public char ToChar(IFormatProvider provider)
         {
-            throw new NotSupportedException();
+            throw new  InvalidCastException();
         }
 
         /// <summary>
@@ -833,7 +812,7 @@ namespace Ekstrand
         /// <returns>Returns NotSupportedException</returns>
         public DateTime ToDateTime(IFormatProvider provider)
         {
-            throw new NotSupportedException();
+            throw new  InvalidCastException();
         }
 
         /// <summary>
@@ -907,6 +886,42 @@ namespace Ekstrand
         }
 
         /// <summary>
+        /// Return a formatted string of this object.
+        /// </summary>
+        /// <returns>Returns a string representation of this Temperature value.</returns>
+        public override string ToString()
+        {
+            return String.Format(new TemperatureToStringFormatter(), "{0:SD}", this);
+        }
+
+        /// <summary>
+        /// Return a formatted string of this object.
+        /// </summary>
+        /// <param name="format">String format values.</param>
+        /// <returns>Return a formatted string based on given format value</returns>
+        ///<remarks>
+        ///Format values: \nS for scalar only \nSD for scalar and degree symbol \nN for scalar value only.
+        ///</remarks>
+        public string ToString(String format)
+        {
+            switch (format)
+            {
+                case "S":
+                    return String.Format(new TemperatureToStringFormatter(), "{0:S}", this);
+                case "SD":
+                    return String.Format(new TemperatureToStringFormatter(), "{0:SD}", this);
+                case "N":
+                    return String.Format(new TemperatureToStringFormatter(), "{0:N}", this);
+                case "SN":
+                    return String.Format(new TemperatureToStringFormatter(), "{0:SN}", this);
+                case "SDN":
+                    return String.Format(new TemperatureToStringFormatter(), "{0:SDN}", this);
+            }
+
+            throw new FormatException("Invalid format parameter: " + format);
+        }
+
+        /// <summary>
         /// Converts the value of this instance to an equivalent String using the specified culture-specific formatting information.
         /// </summary>
         /// <param name="provider">An IFormatProvider interface implementation that supplies culture-specific formatting information. </param>
@@ -968,21 +983,136 @@ namespace Ekstrand
             return (UInt64)m_TemperatureValue;
         }
 
-        #endregion
+        /// <summary>
+        /// Check if given ValueType is a numeric type.
+        /// </summary>
+        /// <param name="value">ValueType to be type queried.</param>
+        /// <returns>True iff ValueType given is a numeric type otherwise false.</returns>
+        private static bool IsNumeric(ValueType value)
+        {
+            if (value is SByte ||
+                value is Byte ||
+                value is Decimal ||
+                value is Double ||
+                value is UInt16 ||
+                value is UInt32 ||
+                value is UInt64 ||
+                value is Int16 ||
+                value is Int32 ||
+                value is Int64 ||
+                value is Single
+              )
+            {
+                return true;
+            }
+            return false;
+        }
 
-    }
+        /// <summary>
+        /// Rescale from Celsius to any of the supported temperature scales.
+        /// </summary>
+        /// <param name="tempType">TemperatureScaleTypes to rescale to.</param>
+        /// <returns>Returns the internal Celsius value rescaled to the given TemperatureScaleTypes value.</returns>
+        private double RescaleFromCelsius(TemperatureScaleTypes tempType)
+        {
+            switch (tempType)
+            {
+                case TemperatureScaleTypes.Celsius:
+                    return m_TemperatureValue;
+                case TemperatureScaleTypes.Fahrenheit:
+                    return Math.Round((m_TemperatureValue * 1.80000) + 32, 4, MidpointRounding.AwayFromZero);
+                case TemperatureScaleTypes.Kelvin:
+                    return Math.Round(m_TemperatureValue + 273.15, 4, MidpointRounding.AwayFromZero);
+                case TemperatureScaleTypes.Rankine:
+                    return Math.Round((m_TemperatureValue + 273.15) * 1.80000, 4, MidpointRounding.AwayFromZero);
+            }
 
-    /// <summary>
-    /// Enumeration of temperature scale types.
-    /// </summary>
-#pragma warning disable CS1591
-    public enum TemperatureScaleTypes
-    {
-        Celsius = 0,
-        Fahrenheit,
-        Kelvin,
-        Rankine // Yah. Still in use here in the USA
-                // Delisle, Newton, Réaumur, Rømer are scales that are no longer in use.
+            // should never get here
+            return MinValue;
+        }
+
+        /// <summary>
+        /// Rescale given value to Celsius.
+        /// </summary>
+        /// <param name="value">Double value to be rescaled.</param>
+        /// <param name="tempType">TemperatureScaleType the given value is in.</param>
+        private void RescaleToCelsius(double value, TemperatureScaleTypes tempType)
+        {
+            switch (tempType)
+            {
+                case TemperatureScaleTypes.Celsius:
+                    this.m_TemperatureValue = Math.Round((value), 4, MidpointRounding.AwayFromZero);
+                    break;
+                case TemperatureScaleTypes.Fahrenheit:
+                    this.m_TemperatureValue = Math.Round((value - 32) * .555555555, 4, MidpointRounding.AwayFromZero);
+                    break;
+                case TemperatureScaleTypes.Kelvin:
+                    this.m_TemperatureValue = Math.Round((value - 273.15), 4, MidpointRounding.AwayFromZero);
+                    break;
+                case TemperatureScaleTypes.Rankine:
+                    this.m_TemperatureValue = Math.Round((value - 491.67) * .555555555, 4, MidpointRounding.AwayFromZero);                   
+                    break;
+            }
+        }
+
+        private void ValidateValue(ValueType value)
+        {
+            if(value is Double)
+            {
+                double d = (double)value;
+                if(Double.IsInfinity(d))
+                {
+                    throw new OverflowException();
+                }
+
+                if(Double.IsNaN(d))
+                {
+                    throw new OverflowException();
+                }
+
+                if (Double.Epsilon.Equals(d))
+                {
+                    throw new OverflowException();
+                }
+            }
+
+            if(value is Decimal)
+            {
+                decimal d = (decimal)value;
+                
+                if(d > decimal.Parse(MaxValue.ToString()))
+                {
+                    throw new OverflowException();
+                }
+
+                if (d < decimal.Parse(MinValue.ToString()))
+                {
+                    throw new OverflowException();
+                }
+            }
+
+            if(value is UInt64)
+            {
+                decimal d = (decimal)value;
+
+                if(d > decimal.Parse(MaxValue.ToString()))
+                {
+                    throw new OverflowException();
+                }                
+            }
+
+            if (value is UInt32)
+            {
+                decimal d = (decimal)value;
+
+                if (d > decimal.Parse(MaxValue.ToString()))
+                {
+                    throw new OverflowException();
+                }
+            }
+        }
+        #endregion Methods 
+
     }
 }
 

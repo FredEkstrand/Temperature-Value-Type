@@ -418,7 +418,7 @@ namespace TemperatureValueTester
 
         [Test]
         [Category("Operators")]
-        public void OperatorMinus()
+        public void OperatorMinusA()
         {
             double A = 56;
             double B = 78;
@@ -432,12 +432,68 @@ namespace TemperatureValueTester
 
         [Test]
         [Category("Operators")]
-        public void OperatorPlus()
+        public void OperatorMinusB()
+        {
+            double A = 56;
+            double B = 78;
+            Temperature tempA = new Temperature(A, TemperatureScaleTypes.Fahrenheit);
+            Temperature tempB = new Temperature(B, TemperatureScaleTypes.Kelvin);
+
+            Temperature t = tempB - tempA;
+
+            Assert.AreEqual(true, ValuesEqual(22, t.ValueAsCelsius));
+        }
+
+        [Test]
+        [Category("Operators")]
+        public void OperatorMinusC()
+        {
+            double A = 56;
+            double B = 78;
+            Temperature tempA = new Temperature(A, TemperatureScaleTypes.Fahrenheit);
+            Temperature tempB = new Temperature(B, TemperatureScaleTypes.Kelvin);
+
+            Temperature t = tempB - tempA;
+
+            Assert.AreEqual(true, ValuesEqual(22, t.ValueAsCelsius));
+        }
+
+        [Test]
+        [Category("Operators")]
+        public void OperatorPlusA()
         {
             double A = 56;
             double B = 78;
             Temperature tempA = new Temperature(A);
             Temperature tempB = new Temperature(B);
+
+            Temperature t = tempB + tempA;
+
+            Assert.AreEqual(true, ValuesEqual(134, t));
+        }
+
+        [Test]
+        [Category("Operators")]
+        public void OperatorPlusB()
+        {
+            double A = 56;
+            double B = 78;
+            Temperature tempA = new Temperature(A, TemperatureScaleTypes.Fahrenheit);
+            Temperature tempB = new Temperature(B, TemperatureScaleTypes.Rankine);
+
+            Temperature t = tempB + tempA;
+
+            Assert.AreEqual(true, ValuesEqual(134, t));
+        }
+
+        [Test]
+        [Category("Operators")]
+        public void OperatorPlusC()
+        {
+            double A = 56;
+            double B = 78;
+            Temperature tempA = new Temperature(A, TemperatureScaleTypes.Kelvin);
+            Temperature tempB = new Temperature(B, TemperatureScaleTypes.Rankine);
 
             Temperature t = tempB + tempA;
 
@@ -465,7 +521,7 @@ namespace TemperatureValueTester
 
         [Test]
         [Category("Operators")]
-        public void OperatorMultiply()
+        public void OperatorMultiplyA()
         {
             double A = 56;
             double B = 78;
@@ -479,7 +535,35 @@ namespace TemperatureValueTester
 
         [Test]
         [Category("Operators")]
-        public void OperatorDivide()
+        public void OperatorMultiplyB()
+        {
+            double A = 56;
+            double B = 78;
+            Temperature tempA = new Temperature(A,TemperatureScaleTypes.Fahrenheit);
+            Temperature tempB = new Temperature(B, TemperatureScaleTypes.Kelvin);
+
+            Temperature t = tempB * tempA;
+
+            Assert.AreEqual(true, ValuesEqual(4368, t));
+        }
+
+        [Test]
+        [Category("Operators")]
+        public void OperatorMultiplyC()
+        {
+            double A = 56;
+            double B = 78;
+            Temperature tempA = new Temperature(A, TemperatureScaleTypes.Kelvin);
+            Temperature tempB = new Temperature(B, TemperatureScaleTypes.Rankine);
+
+            Temperature t = tempB * tempA;
+
+            Assert.AreEqual(true, ValuesEqual(4368, t));
+        }
+
+        [Test]
+        [Category("Operators")]
+        public void OperatorDivideA()
         {
             double A = 56;
             double B = 78;
@@ -494,7 +578,37 @@ namespace TemperatureValueTester
 
         [Test]
         [Category("Operators")]
-        public void OperatorLessThan()
+        public void OperatorDivideB()
+        {
+            double A = 56;
+            double B = 78;
+            Temperature tempA = new Temperature(A, TemperatureScaleTypes.Fahrenheit);
+            Temperature tempB = new Temperature(B, TemperatureScaleTypes.Kelvin);
+
+            Temperature t = tempB / tempA;
+            Console.WriteLine("A {0}, B {0}", 1.3928, t);
+            Assert.AreEqual(true, ValuesEqual(1.3928, t));
+
+        }
+
+        [Test]
+        [Category("Operators")]
+        public void OperatorDivideC()
+        {
+            double A = 56;
+            double B = 78;
+            Temperature tempA = new Temperature(A, TemperatureScaleTypes.Kelvin);
+            Temperature tempB = new Temperature(B, TemperatureScaleTypes.Rankine);
+
+            Temperature t = tempB / tempA;
+            Console.WriteLine("A {0}, B {0}", 1.3928, t);
+            Assert.AreEqual(true, ValuesEqual(1.3928, t));
+
+        }
+
+        [Test]
+        [Category("Operators")]
+        public void OperatorLessThanA()
         {
             double A = 56;
             double B = 78;
@@ -510,7 +624,39 @@ namespace TemperatureValueTester
 
         [Test]
         [Category("Operators")]
-        public void OperatorGreatherThan()
+        public void OperatorLessThanB()
+        {
+            double A = 56;
+            double B = 632.1;
+            Temperature tempA = new Temperature(A, TemperatureScaleTypes.Fahrenheit);
+            Temperature tempB = new Temperature(B, TemperatureScaleTypes.Rankine);
+
+            bool b = tempB < tempA;
+            Assert.AreEqual(false, b);
+
+            b = tempA < tempB;
+            Assert.AreEqual(true, b);
+        }
+
+        [Test]
+        [Category("Operators")]
+        public void OperatorLessThanC()
+        {
+            double A = 56;
+            double B = 78;
+            Temperature tempA = new Temperature(A, TemperatureScaleTypes.Rankine);
+            Temperature tempB = new Temperature(B, TemperatureScaleTypes.Kelvin);
+
+            bool b = tempB < tempA;
+            Assert.AreEqual(false, b);
+
+            b = tempA < tempB;
+            Assert.AreEqual(true, b);
+        }
+
+        [Test]
+        [Category("Operators")]
+        public void OperatorGreatherThanA()
         {
             double A = 56;
             double B = 78;
@@ -526,7 +672,40 @@ namespace TemperatureValueTester
 
         [Test]
         [Category("Operators")]
-        public void OperatorEqualEqual()
+        public void OperatorGreatherThanB()
+        {
+            double A = 56;
+            double B = 78;
+            Temperature tempA = new Temperature(A, TemperatureScaleTypes.Rankine);
+            Temperature tempB = new Temperature(B, TemperatureScaleTypes.Fahrenheit);
+
+            bool b = tempB > tempA;
+            Assert.AreEqual(true, b);
+
+            b = tempA > tempB;
+            Assert.AreEqual(false, b);
+        }
+
+        [Test]
+        [Category("Operators")]
+        public void OperatorGreatherThanC()
+        {
+            double A = 56;
+            double B = 78;
+            Temperature tempA = new Temperature(A, TemperatureScaleTypes.Rankine);
+            Temperature tempB = new Temperature(B, TemperatureScaleTypes.Kelvin);
+
+            bool b = tempB > tempA;
+            Assert.AreEqual(true, b);
+
+            b = tempA > tempB;
+            Assert.AreEqual(false, b);
+        }
+
+
+        [Test]
+        [Category("Operators")]
+        public void OperatorEqualEqualA()
         {
             double A = 56;
             double B = 78;
@@ -540,7 +719,35 @@ namespace TemperatureValueTester
 
         [Test]
         [Category("Operators")]
-        public void OperatorMinusNotEqual()
+        public void OperatorEqualEqualB()
+        {
+            double A = 56;
+            double B = 78;
+            Temperature tempA = new Temperature(A, TemperatureScaleTypes.Kelvin);
+            Temperature tempB = new Temperature(B, TemperatureScaleTypes.Rankine);
+
+            bool b = tempB == tempA;
+            Assert.AreEqual(false, b);
+
+        }
+
+        [Test]
+        [Category("Operators")]
+        public void OperatorEqualEqualC()
+        {
+            double A = 56;
+            double B = 78;
+            Temperature tempA = new Temperature(A, TemperatureScaleTypes.Rankine);
+            Temperature tempB = new Temperature(B, TemperatureScaleTypes.Fahrenheit);
+
+            bool b = tempB == tempA;
+            Assert.AreEqual(false, b);
+
+        }
+
+        [Test]
+        [Category("Operators")]
+        public void OperatorMinusNotEqualA()
         {
             double A = 56;
             double B = 78;
@@ -554,7 +761,35 @@ namespace TemperatureValueTester
 
         [Test]
         [Category("Operators")]
-        public void OperatorGreaterThanEqual()
+        public void OperatorMinusNotEqualB()
+        {
+            double A = 56;
+            double B = 78;
+            Temperature tempA = new Temperature(A, TemperatureScaleTypes.Fahrenheit);
+            Temperature tempB = new Temperature(B, TemperatureScaleTypes.Rankine);
+
+            bool b = tempB != tempA;
+            Assert.AreEqual(true, b);
+
+        }
+
+        [Test]
+        [Category("Operators")]
+        public void OperatorMinusNotEqualC()
+        {
+            double A = 56;
+            double B = 78;
+            Temperature tempA = new Temperature(A, TemperatureScaleTypes.Fahrenheit);
+            Temperature tempB = new Temperature(B, TemperatureScaleTypes.Kelvin);
+
+            bool b = tempB != tempA;
+            Assert.AreEqual(true, b);
+
+        }
+
+        [Test]
+        [Category("Operators")]
+        public void OperatorGreaterThanEqualA()
         {
             double A = 56;
             double B = 78;
@@ -570,12 +805,76 @@ namespace TemperatureValueTester
 
         [Test]
         [Category("Operators")]
-        public void OperatorLessThanEqual()
+        public void OperatorGreaterThanEqualB()
+        {
+            double A = 56;
+            double B = 78;
+            Temperature tempA = new Temperature(A, TemperatureScaleTypes.Kelvin);
+            Temperature tempB = new Temperature(B, TemperatureScaleTypes.Fahrenheit);
+
+            bool b = tempB >= tempA;
+            Assert.AreEqual(true, b);
+
+            b = tempA >= tempB;
+            Assert.AreEqual(false, b);
+        }
+
+        [Test]
+        [Category("Operators")]
+        public void OperatorGreaterThanEqualC()
+        {
+            double A = 56; // 13.33 c
+            double B = 632.1; // 78 c
+            Temperature tempA = new Temperature(A, TemperatureScaleTypes.Fahrenheit);
+            Temperature tempB = new Temperature(B, TemperatureScaleTypes.Rankine);
+
+            bool b = tempB >= tempA;
+            Assert.AreEqual(true, b);
+
+            b = tempA >= tempB;
+            Assert.AreEqual(false, b);
+        }
+
+        [Test]
+        [Category("Operators")]
+        public void OperatorLessThanEqualA()
         {
             double A = 56;
             double B = 78;
             Temperature tempA = new Temperature(A);
             Temperature tempB = new Temperature(B);
+
+            bool b = tempB <= tempA;
+            Assert.AreEqual(false, b);
+
+            b = tempA <= tempB;
+            Assert.AreEqual(true, b);
+        }
+
+        [Test]
+        [Category("Operators")]
+        public void OperatorLessThanEqualB()
+        {
+            double A = 56;
+            double B = 78;
+            Temperature tempA = new Temperature(A, TemperatureScaleTypes.Rankine);
+            Temperature tempB = new Temperature(B, TemperatureScaleTypes.Fahrenheit);
+
+            bool b = tempB <= tempA;
+            Assert.AreEqual(false, b);
+
+            b = tempA <= tempB;
+            Assert.AreEqual(true, b);
+        }
+
+        [Test]
+        [Category("Operators")]
+        public void OperatorLessThanEqualC()
+        {
+            double A = 56;
+            double B = 78;
+            Temperature tempA = new Temperature(A, TemperatureScaleTypes.Rankine);
+            Temperature tempB = new Temperature(B, TemperatureScaleTypes.Kelvin);
 
             bool b = tempB <= tempA;
             Assert.AreEqual(false, b);
@@ -900,7 +1199,7 @@ namespace TemperatureValueTester
 
         #endregion
 
-        #region Interface Implimentation Test Sets
+        #region Interface Implementation Test Sets
 
         [Test]
         [Category("Interface")]

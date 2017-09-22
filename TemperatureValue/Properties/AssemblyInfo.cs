@@ -62,8 +62,8 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyFileVersion("1.0.0.0")]
 [assembly: AssemblyKey("AKH8-NN0E9-N3ST7-9491J-1R656-18CT0-U816")]
 
-[AttributeUsage(AttributeTargets.Assembly)]
 #pragma warning disable CS1591
+[AttributeUsage(AttributeTargets.Assembly)]
 public class AssemblyKey : Attribute
 {
     private string m_KeyValue;
