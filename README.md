@@ -5,6 +5,9 @@
 # Overview
 This project takes the idea of temperature as a numeric type defined in the .Net Framework to a defined type.
 
+#### Version
+1.0.1
+
 #### Features
 The Temperature value type have the following features:
 * Create instances in desire temperature scale: Celsius, Fahrenheit, Kelvin, and Rankine.
