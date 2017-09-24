@@ -72,11 +72,7 @@ branch. Pull requests are always welcome.
 ## Contact
 Fred Ekstrand 
 email: fredekstrandgithub@gmail.com
-## Licensing
 
-This project is licensed under the MIT License - see the LICENSE.md file for details.
-
-email: fredekstrandgithub@gmail.com
 ## Licensing
 
 This project is licensed under the MIT License - see the [LICENSE.md](https://github.com/FredEkstrand/TemperatureValue) file for details.
