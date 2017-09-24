@@ -1,4 +1,4 @@
-![Project type](https://github.com/FredEkstrand/ImageFiles/raw/master/CodeIcon.png )<img src="https://github.com/FredEkstrand/ImageFiles/raw/master/temperature.png" width="50" height="100"/>
+![Project type](https://github.com/FredEkstrand/ImageFiles/raw/master/CodeIcon.png )
 
 ![Version 1.0.0](https://img.shields.io/badge/Version-1.0.0-brightgreen.svg) ![Licence MIT](https://img.shields.io/badge/Licence-MIT-blue.svg)
 
