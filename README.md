@@ -3,7 +3,8 @@
 ![Version 1.0.0](https://img.shields.io/badge/Version-1.0.0-brightgreen.svg) ![Licence MIT](https://img.shields.io/badge/Licence-MIT-blue.svg)
 
 # Overview
-This project takes the idea of temperature as a numeric type defined in the .Net Framework to a defined type.
+This project takes the idea of temperature as a defined type in the .Net Framework.
+
 
 #### Features
 The Temperature value type have the following features:
@@ -71,11 +72,7 @@ branch. Pull requests are always welcome.
 
 ## Contact
 Fred Ekstrand 
-
 email: fredekstrandgithub@gmail.com
-
 ## Licensing
 
-This project is licensed under the MIT License - see the [LICENSE.md](https://github.com/FredEkstrand/TemperatureValue) file for details.
-
-
+This project is licensed under the MIT License - see the LICENSE.md file for details.
