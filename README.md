@@ -31,7 +31,7 @@ using Ekstrand;
 ### Code
 Creates a new instance of Temperature at default Celsius scale.
 ```csharp
-Temperature tempValue = new Temperature(23.5);
+Temperature tempValue = 23.5;
 ```
 Create a new instance of Temperature with defined temperature scale and default value of 0.
 ```csharp
