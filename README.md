@@ -1,6 +1,6 @@
 ![Project type](https://github.com/FredEkstrand/ImageFiles/raw/master/CodeIcon.png )
 
-![Version 1.0.0](https://img.shields.io/badge/Version-1.0.0-brightgreen.svg) ![Licence MIT](https://img.shields.io/badge/Licence-MIT-blue.svg) ![Version 1.0.0](https://img.shields.io/badge/Version-1.0.0-brightgreen.svg) ![Licence MIT](https://img.shields.io/badge/Licence-MIT-blue.svg)
+![Version 1.0.0](https://img.shields.io/badge/Version-1.0.0-brightgreen.svg) ![Licence MIT](https://img.shields.io/badge/Licence-MIT-blue.svg) ![Version 1.0.0](https://img.shields.io/badge/Version-1.0.0-brightgreen.svg)
 
 # Overview
 This project takes the idea of temperature as a defined type in the .Net Framework.
