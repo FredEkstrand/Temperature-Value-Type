@@ -1402,5 +1402,15 @@ namespace TemperatureValueTester
 
         #endregion
 
+        [Test]
+        public void foo()
+        {
+            
+            Temperature temp = 32;
+            
+            Assert.AreEqual(32, temp.Value);
+
+            
+        }
     }
 }

@@ -8,7 +8,6 @@ C:\Users\frede\Documents\GitHub\TemperatureValue\TemperatureValue\bin\Release\Te
 C:\Users\frede\Documents\GitHub\TemperatureValue\TemperatureValue\bin\Release\TemperatureValue.pdb
 C:\Users\frede\Documents\GitHub\TemperatureValue\TemperatureValue\bin\Release\System.Net.Http.dll
 C:\Users\frede\Documents\GitHub\TemperatureValue\TemperatureValue\bin\Release\System.Net.Http.xml
-C:\Users\frede\Documents\GitHub\TemperatureValue\TemperatureValue\obj\Release\TemperatureValue.csprojResolveAssemblyReference.cache
 C:\Users\frede\Documents\GitHub\TemperatureValue\TemperatureValue\obj\Release\TemperatureValue.dll
 C:\Users\frede\Documents\GitHub\TemperatureValue\TemperatureValue\obj\Release\TemperatureValue.pdb
 C:\Users\frede\Documents\GitHub\TemperatureValue\TemperatureValue\bin\Release\TemperatureValue.XML

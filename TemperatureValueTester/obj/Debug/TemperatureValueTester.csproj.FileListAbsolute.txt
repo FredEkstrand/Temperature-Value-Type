@@ -19,7 +19,6 @@ C:\Users\frede\Documents\GitHub\TemperatureValue\TemperatureValueTester\bin\Debu
 C:\Users\frede\Documents\GitHub\TemperatureValue\TemperatureValueTester\bin\Debug\Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll
 C:\Users\frede\Documents\GitHub\TemperatureValue\TemperatureValueTester\bin\Debug\nunit.framework.dll
 C:\Users\frede\Documents\GitHub\TemperatureValue\TemperatureValueTester\bin\Debug\NUnit3.TestAdapter.dll
-C:\Users\frede\Documents\GitHub\TemperatureValue\TemperatureValueTester\bin\Debug\TemperatureValue.dll
 C:\Users\frede\Documents\GitHub\TemperatureValue\TemperatureValueTester\bin\Debug\Mono.Cecil.dll
 C:\Users\frede\Documents\GitHub\TemperatureValue\TemperatureValueTester\bin\Debug\nunit.engine.api.dll
 C:\Users\frede\Documents\GitHub\TemperatureValue\TemperatureValueTester\bin\Debug\nunit.engine.dll
@@ -30,3 +29,5 @@ C:\Users\frede\Documents\GitHub\TemperatureValue\TemperatureValueTester\bin\Debu
 C:\Users\frede\Documents\GitHub\TemperatureValue\TemperatureValueTester\obj\Debug\TemperatureValueTester.csprojResolveAssemblyReference.cache
 C:\Users\frede\Documents\GitHub\TemperatureValue\TemperatureValueTester\obj\Debug\TemperatureValueTester.dll
 C:\Users\frede\Documents\GitHub\TemperatureValue\TemperatureValueTester\obj\Debug\TemperatureValueTester.pdb
+C:\Users\frede\Documents\GitHub\TemperatureValue\TemperatureValueTester\bin\Debug\Mono.Cecil.Pdb.dll
+C:\Users\frede\Documents\GitHub\TemperatureValue\TemperatureValueTester\bin\Debug\Mono.Cecil.Mdb.dll
