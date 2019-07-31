@@ -1,8 +1,9 @@
-![Project type](https://github.com/FredEkstrand/ImageFiles/raw/master/CodeIcon.png )
 
-![Version 1.0.0](https://img.shields.io/badge/Version-1.0.0-brightgreen.svg) ![Licence MIT](https://img.shields.io/badge/Licence-MIT-blue.svg)  [![codecov](https://codecov.io/gh/FredEkstrand/TemperatureValue/branch/master/graph/badge.svg)](https://codecov.io/gh/FredEkstrand/TemperatureValue)
+# Temperature Value Type
+![Version 1.0.0](https://img.shields.io/badge/Version-1.0.0-brightgreen.svg) ![Licence MIT](https://img.shields.io/badge/Licence-MIT-blue.svg)
+[![codecov](https://codecov.io/gh/FredEkstrand/TemperatureValue/branch/master/graph/badge.svg)](https://codecov.io/gh/FredEkstrand/TemperatureValue)
 
-
+<img src="https://github.com/FredEkstrand/ImageFiles/raw/master/Temperature/TemperatureGauge.jpg " width=150 height=150 />
 
 # Overview
 This project takes the idea of temperature as a defined type in the .Net Framework.
@@ -14,26 +15,25 @@ The Temperature value type have the following features:
 * Default temperature scale is Celsius.
 * Min/Max value are ±1.7976931348623157E+308.
 * Temperature value type have properties to allow quick conversion to Celsius, Fahrenheit, Kelvin, and Rankine from default defined scale.
-* Implicit conversion to/from UInt16, UInt32, UInt64, Int16, Int32, Int64, Single, Decimal, and Double.
+* Implicit/explicit conversion for UInt16, UInt32, UInt64, Int16, Int32, Int64, Single, Decimal, and Double.
 * Defined operator: + unary, - negation, - subtract, + addition, * multiplicity, / division, ==, !=, <, >, <=, and >=.
 * Defined IComparable, IEquatable, IConvertible, and IFormattable.
 
-## Download
-The souce code and provided DLL is written in C# and targeted for the .Net Framework 4.0 and later.
+# Getting started
+The source code is written in C# and targeted for the .Net Framework 4.0 and later.
+Download the entire project and compile.
 
-You can download the DLL [here](#).
-
-## Getting started
-Once downloaded add a reference to the dll in your Visual Studio project.
+# Usage
+Once you have compiled the project reference the dll in your Visual Studio project.
 Then in your code file add the following to the collection of using statement.
 
 ```csharp
 using Ekstrand;
 ```
-### Code
+#### Examples
 Creates a new instance of Temperature at default Celsius scale.
 ```csharp
-Temperature tempValue = 23.5;
+Temperature tempValue = new Temperature(23.5);
 ```
 Create a new instance of Temperature with defined temperature scale and default value of 0.
 ```csharp
@@ -61,20 +61,20 @@ else if(three >= 115)
 ...
 ```
 
-### API
-API documentation can be found [here](http://fredekstrand.github.io/TemperatureValue). 
+# Code Documentation
+MSDN-style code documentation can be found [here](http://fredekstrand.github.io/TemperatureValue).
 
-## History
+# History
  1.0.0 Initial release into the wild.
- 
-## Contributing
+
+# Contributing
 
 If you'd like to contribute, please fork the repository and use a feature
 branch. Pull requests are always welcome.
 
-## Contact
-Fred Ekstrand 
+# Contact
+Fred Ekstrand
 email: fredekstrandgithub@gmail.com
-## Licensing
+# Licensing
 
 This project is licensed under the MIT License - see the LICENSE.md file for details.
