@@ -482,8 +482,8 @@ namespace TemperatureValueTester
             Temperature tempB = new Temperature(B, TemperatureScaleTypes.Rankine);
 
             Temperature t = tempB + tempA;
-
-            Assert.AreEqual(true, ValuesEqual(134, t));
+            //  13.3333 + -229.8167 
+            Assert.AreEqual(true, ValuesEqual(-216.4834, t));
         }
 
         [Test]
@@ -496,8 +496,8 @@ namespace TemperatureValueTester
             Temperature tempB = new Temperature(B, TemperatureScaleTypes.Rankine);
 
             Temperature t = tempB + tempA;
-
-            Assert.AreEqual(true, ValuesEqual(134, t));
+            // -217.15 + -229.8167
+            Assert.AreEqual(true, ValuesEqual(-446.9667, t));
         }
 
         [Test]
@@ -586,8 +586,8 @@ namespace TemperatureValueTester
             Temperature tempB = new Temperature(B, TemperatureScaleTypes.Kelvin);
 
             Temperature t = tempB / tempA;
-            Console.WriteLine("A {0}, B {0}", 1.3928, t);
-            Assert.AreEqual(true, ValuesEqual(1.3928, t));
+            Console.WriteLine(t);
+            Assert.AreEqual(-14, t);
 
         }
 
@@ -1269,7 +1269,7 @@ namespace TemperatureValueTester
         public void TempToBoolean()
         {
             Temperature temp = new Temperature();
-            Assert.Throws(typeof(NotSupportedException),
+            Assert.Throws(typeof(InvalidCastException),
                 delegate { temp.ToBoolean(CultureInfo.InvariantCulture.NumberFormat); });
         }
 
@@ -1278,7 +1278,7 @@ namespace TemperatureValueTester
         public void TempToChar()
         {
             Temperature temp = new Temperature();
-            Assert.Throws(typeof(NotSupportedException),
+            Assert.Throws(typeof(InvalidCastException),
                 delegate { temp.ToChar(CultureInfo.InvariantCulture.NumberFormat); });
         }
 
@@ -1287,7 +1287,7 @@ namespace TemperatureValueTester
         public void TempToDateTime()
         {
             Temperature temp = new Temperature();
-            Assert.Throws(typeof(NotSupportedException),
+            Assert.Throws(typeof(InvalidCastException),
                 delegate { temp.ToDateTime(CultureInfo.InvariantCulture.NumberFormat); });
         }
 
@@ -1402,15 +1402,5 @@ namespace TemperatureValueTester
 
         #endregion
 
-        [Test]
-        public void foo()
-        {
-            
-            Temperature temp = 32;
-            
-            Assert.AreEqual(32, temp.Value);
-
-            
-        }
     }
 }

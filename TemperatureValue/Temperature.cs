@@ -1078,14 +1078,17 @@ namespace Ekstrand
 
             if(value is Decimal)
             {
-                decimal d = (decimal)value;
-                
-                if(d > decimal.Parse(MaxValue.ToString()))
+                // conversion value type of decimal to decimal would cause an overflow error
+                // workaround is to convert to string the parse back to decimal.
+                string s = value.ToString();
+                decimal d = Decimal.Parse(s);
+
+                if (d > Convert.ToDecimal(MaxValue))
                 {
                     throw new OverflowException();
                 }
 
-                if (d < decimal.Parse(MinValue.ToString()))
+                if (d < Convert.ToDecimal(MinValue))
                 {
                     throw new OverflowException();
                 }
@@ -1093,9 +1096,9 @@ namespace Ekstrand
 
             if(value is UInt64)
             {
-                decimal d = (decimal)value;
+                double d = Convert.ToDouble(value);
 
-                if(d > decimal.Parse(MaxValue.ToString()))
+                if(d > MaxValue)
                 {
                     throw new OverflowException();
                 }                
@@ -1103,9 +1106,9 @@ namespace Ekstrand
 
             if (value is UInt32)
             {
-                decimal d = (decimal)value;
-
-                if (d > decimal.Parse(MaxValue.ToString()))
+                double d = Convert.ToDouble(value);
+               
+                if (d > MaxValue)
                 {
                     throw new OverflowException();
                 }

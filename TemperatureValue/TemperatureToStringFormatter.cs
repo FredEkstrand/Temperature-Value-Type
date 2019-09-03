@@ -1,4 +1,4 @@
-﻿/*
+﻿/* 
 Open source MIT License
 Copyright (c) 2017 Fred A Ekstrand Jr.
 

@@ -11,3 +11,9 @@ C:\Users\frede\Documents\GitHub\TemperatureValue\TemperatureValue\bin\Release\Sy
 C:\Users\frede\Documents\GitHub\TemperatureValue\TemperatureValue\obj\Release\TemperatureValue.dll
 C:\Users\frede\Documents\GitHub\TemperatureValue\TemperatureValue\obj\Release\TemperatureValue.pdb
 C:\Users\frede\Documents\GitHub\TemperatureValue\TemperatureValue\bin\Release\TemperatureValue.XML
+C:\GitHub\Temperature-Value-Type\TemperatureValue\bin\Release\TemperatureValue.XML
+C:\GitHub\Temperature-Value-Type\TemperatureValue\bin\Release\TemperatureValue.dll
+C:\GitHub\Temperature-Value-Type\TemperatureValue\bin\Release\TemperatureValue.pdb
+C:\GitHub\Temperature-Value-Type\TemperatureValue\obj\Release\TemperatureValue.csproj.CoreCompileInputs.cache
+C:\GitHub\Temperature-Value-Type\TemperatureValue\obj\Release\TemperatureValue.dll
+C:\GitHub\Temperature-Value-Type\TemperatureValue\obj\Release\TemperatureValue.pdb
