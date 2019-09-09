@@ -62,7 +62,7 @@ else if(three >= 115)
 ```
 
 # Code Documentation
-MSDN-style code documentation can be found [here](http://fredekstrand.github.io/TemperatureValue).
+MSDN-style code documentation can be found [here](http://fredekstrand.github.io/ClassDocTemperatureValue).
 
 # History
  1.0.0 Initial release into the wild.
